@@ -19,6 +19,11 @@ public class PersonController {
         return personService.getPersons();
     }
 
+    @GetMapping("/{id}")
+    public PersonDto getPerson(@PathVariable int id) {
+        return personService.getPerson(id);
+    }
+
     @PostMapping
     public PersonDto addPerson(@RequestBody PersonDto personDto) {
         return personService.addPerson(personDto);

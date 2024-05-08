@@ -17,16 +17,21 @@ public class PersonService {
 
     public List<PersonDto> getPersons() {
         List<Person> persons = personRepository.findAll();
-        return persons.stream().map(person -> {
-            PersonDto personDto = MapperUtil.map(person, PersonDto.class);
-            return personDto;
-        }).collect(Collectors.toList());
+        return persons.stream().map(person -> MapperUtil.map(person, PersonDto.class)).collect(Collectors.toList());
+    }
+
+
+    public PersonDto getPerson(int id) {
+        Person person = personRepository.findById(id);
+        return MapperUtil.map(person, PersonDto.class);
+
     }
 
     public PersonDto addPerson(PersonDto personDto) {
-        Person person = MapperUtil.map(personDto, Person.class);
-        person = personRepository.save(person);
-        return MapperUtil.map(person, PersonDto.class);
+        personDto.setId(personDto.getShortId());
+           Person person = MapperUtil.map(personDto, Person.class);
+            personRepository.save(person);
+            return personDto;
     }
 }
 

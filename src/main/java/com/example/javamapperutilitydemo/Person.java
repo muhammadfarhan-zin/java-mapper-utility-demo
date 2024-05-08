@@ -19,18 +19,10 @@ public class Person {
     @Column(name = "name")
     private String name;
 
-    public Person() {
-
-    }
+    public Person() {}
 
     public Person(int id, String name) {
         this.id = id;
         this.name = name;
     }
-
-    public Person(PersonDto personDto) {
-        this.id = Integer.parseInt(personDto.getId());
-        this.name = personDto.getName();
-    }
-
 }

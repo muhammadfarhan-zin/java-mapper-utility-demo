@@ -1,13 +1,12 @@
 package com.example.javamapperutilitydemo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 public class PersonDto {
-    @Getter
-    @Setter
     @JsonProperty
     private String id;
 
@@ -18,15 +17,17 @@ public class PersonDto {
 
     public PersonDto() {
     }
-    
-    public PersonDto(String id, String name) {
-        this.id = id;
-        this.name = name;
+
+    public String getId() {
+        return "demo-" + this.id;
     }
 
-    public PersonDto(final Person person) {
-        this.id = "demo-" + person.getId();
-        this.name = person.getName();
+    @JsonIgnore
+    public String getShortId() {
+        return this.id;
     }
 
+    public void setId(String id) {
+        this.id = id.replace("demo-", "");
+    }
 }
